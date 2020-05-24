@@ -13,7 +13,7 @@ class ArtistCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10.0),
       padding: EdgeInsets.only(left: 30.0, top: 6.0, bottom: 6.0, right: 5.0),
-      height: 150,
+      height: 160,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Colors.grey.shade800),
@@ -21,10 +21,10 @@ class ArtistCard extends StatelessWidget {
         children: <Widget>[
           ClipRRect(
             borderRadius: BorderRadius.circular(8.0),
-            child: Image.network(
+            child: Image.asset(
               this.artist.cover,
               height: 150,
-              width: 80,
+              width: 90,
               fit: BoxFit.cover,
             ),
           ),

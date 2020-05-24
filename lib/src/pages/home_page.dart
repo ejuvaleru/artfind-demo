@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Models
 import 'package:artfind/src/models/artist_model.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -18,7 +19,7 @@ class HomePage extends StatelessWidget {
               Container(
                 child: Stack(
                   children: <Widget>[
-                    Image.network(
+                    Image.asset(
                       artists[i].cover,
                       height: double.maxFinite,
                       width: double.maxFinite,
@@ -34,7 +35,7 @@ class HomePage extends StatelessWidget {
                             begin: FractionalOffset.topCenter,
                             end: FractionalOffset.bottomCenter,
                             colors: [
-                              Colors.grey.withOpacity(0.0),
+                              Colors.black.withOpacity(0.05),
                               Colors.black,
                             ],
                             stops: [0.0, 1.0],
@@ -43,9 +44,12 @@ class HomePage extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text('desliza para ver más'),
+                            Padding(
+                              padding: EdgeInsets.only(top: 25.0),
+                              child: Text('desliza para ver más'),
+                            ),
                             SizedBox(
-                              height: 350.0,
+                              height: 300.0,
                             ),
                             Container(
                               child: Column(
@@ -69,26 +73,44 @@ class HomePage extends StatelessWidget {
                                         color: Colors.yellowAccent,
                                         fontWeight: FontWeight.bold),
                                   ),
+                                  SizedBox(
+                                    height: 20.0,
+                                  ),
                                   Text(
                                     artists[i].bio,
                                     style: TextStyle(fontSize: 12),
                                   ),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(Icons.arrow_right),
-                                      ),
+                                      (i != 0)
+                                          ? IconButton(
+                                              onPressed: () {},
+                                              icon: FaIcon(
+                                                  FontAwesomeIcons.arrowLeft),
+                                            )
+                                          : Text(''),
+                                      (i != artists.length - 1)
+                                          ? IconButton(
+                                              onPressed: () {},
+                                              icon: FaIcon(
+                                                  FontAwesomeIcons.arrowRight),
+                                            )
+                                          : Text(''),
                                     ],
                                   ),
                                 ],
                               ),
                             ),
                             Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Text('ver más opciones'),
-                                Icon(Icons.arrow_drop_down),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                FaIcon(FontAwesomeIcons.angleDown),
                               ],
                             ),
                           ],
@@ -122,10 +144,13 @@ class _MenuDrawer extends StatelessWidget {
                 'artfind',
                 style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
               ),
-              Text('Perfil'),
-              Text('Inicio'),
-              Text('Registrarme'),
-              Text('Contacto'),
+              SizedBox(
+                height: 50.0,
+              ),
+              _MenuItemButton('Perfil'),
+              _MenuItemButton('Inicio'),
+              _MenuItemButton('Registrate'),
+              _MenuItemButton('Contacto'),
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -154,3 +179,25 @@ class _MenuDrawer extends StatelessWidget {
   }
 }
 
+class _MenuItemButton extends StatelessWidget {
+  final String text;
+  const _MenuItemButton(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      splashColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      onTap: () {},
+      child: Container(
+        padding: EdgeInsets.only(top: 7.0, bottom: 7.0),
+        decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+        child: Text(
+          this.text,
+          style: TextStyle(fontWeight: FontWeight.bold),
+          textAlign: TextAlign.left,
+        ),
+      ),
+    );
+  }
+}

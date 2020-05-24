@@ -17,55 +17,54 @@ class DescubreMasPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.0),
-      child: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(top: 40),
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-              decoration: BoxDecoration(
-                border: Border.all(width: 1.0, color: Colors.white),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                children: <Widget>[
-                  Icon(Icons.search),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Text('Buscar por ciudad'),
-                ],
-              ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(top: 40),
+            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+            decoration: BoxDecoration(
+              border: Border.all(width: 1.0, color: Colors.white),
+              borderRadius: BorderRadius.circular(20),
             ),
-
-            SizedBox(
-              height: 8.0,
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.search),
+                SizedBox(
+                  width: 10.0,
+                ),
+                Text('Buscar por ciudad'),
+              ],
             ),
-            CustomAppBar(),
+          ),
 
-            SizedBox(
-              height: 8.0,
-            ),
+          SizedBox(
+            height: 8.0,
+          ),
+          CustomAppBar(showBack: false,),
 
-            Text(
-              'Descubre más',
-              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
-            ),
+          SizedBox(
+            height: 8.0,
+          ),
 
-            SizedBox(
-              height: 20.0,
-            ),
+          Text(
+            'Descubre más',
+            style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+          ),
 
-            // Artists card list
+          SizedBox(
+            height: 20.0,
+          ),
 
-            ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
+          // Artists card list
+
+          Flexible(
+            child: ListView.builder(
               padding: EdgeInsets.zero,
               itemCount: artists.length,
               shrinkWrap: true,
+              physics: BouncingScrollPhysics(),
               itemBuilder: (BuildContext context, i) {
                 return GestureDetector(
                   onTap: () {
@@ -81,8 +80,8 @@ class DescubreMasPage extends StatelessWidget {
                 );
               },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
